@@ -1,5 +1,11 @@
 # Description: A simple To-Do List application that allows users to add tasks, view tasks, mark tasks as complete, and delete tasks.
 
+import os
+import sys
+import time
+import datetime
+
+
 to_do_list = []
 tasks = {}
 
@@ -23,7 +29,7 @@ def view_tasks():
         print("Tasks:")
         for index, task in enumerate(to_do_list, start=1):
             print(f"{index}. Title: {task['title']}, Status: {task['status']}, Due Date: {task['due_date']}, Priority: {task['priority']}")
-    time.sleep(30)
+    time.sleep(20)
 
 
 def mark_complete():
@@ -35,26 +41,26 @@ def mark_complete():
             raise ValueError
     except ValueError:
         print("Invalid input. Please enter a valid index.")
-        time.sleep(30)
+        time.sleep(20)
     else:
         to_do_list[task_index - 1]["status"] = "Complete"
         print("Task marked as complete.")
-        time.sleep(30)
+        time.sleep(20)
 
 def delete_task():
     view_tasks()
-        task_index = input("Enter the index of the task you want to delete: ")
-        try:
-            task_index = int(task_index)
-            if task_index < 1 or task_index > len(to_do_list):
-                raise ValueError
-        except ValueError:
-            print("Invalid input. Please enter a valid index.")
-            time.sleep(1)
-        else:
-            del to_do_list[task_index - 1]
-            print("Task deleted successfully.")
-            time.sleep(30)
+    task_index = input("Enter the index of the task you want to delete: ")
+    try:
+        task_index = int(task_index)
+        if task_index < 1 or task_index > len(to_do_list):
+            raise ValueError
+    except ValueError:
+        print("Invalid input. Please enter a valid index.")
+        time.sleep(15)
+    else:
+        del to_do_list[task_index - 1]
+        print("Task deleted successfully.")
+        time.sleep(20)
 
 def edit_due_date():
     view_tasks()
@@ -70,7 +76,7 @@ def edit_due_date():
         new_due_date = input("Enter the new due date of the task (mm/dd/yyyy): ")
         to_do_list[task_index - 1]["due_date"] = new_due_date
         print("Due date updated successfully.")
-        time.sleep(15)
+        time.sleep(20)
 
 def edit_priority():
     view_tasks()
@@ -81,12 +87,12 @@ def edit_priority():
             raise ValueError
     except ValueError:
         print("Invalid input. Please enter a valid index.")
-        time.sleep(20)
+        time.sleep(15)
     else:
         new_priority = input("Enter the new priority of the task (High, Medium, Low): ")
         to_do_list[task_index - 1]["priority"] = new_priority
         print("Priority updated successfully.")
-        time.sleep(30)
+        time.sleep(20)
 
 def quit_app():
     print("Quitting the application...")
@@ -111,7 +117,7 @@ def main():
         elif choice == "2":
             view_tasks()
         elif choice == "3":
-            mark_task_complete()
+            mark_complete()
         elif choice == "4":
             delete_task()
         elif choice == "5":
@@ -127,5 +133,6 @@ def main():
 if __name__ == "__main__":
     main()
 
+# End of To-Do List Application
 
 
